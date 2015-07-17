@@ -1,0 +1,185 @@
+@charset "utf-8"
+@import url(http://fonts.googleapis.com/css?family=Lato:300);
+
+/*CSSリセット*/
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,
+pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,
+strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,
+caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,
+figure,footer,header,hgroup,menu,nav,section,summary,time,mark,
+audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;
+vertical-align:baseline;background:transparent;font-weight:normal;}
+body{line-height:1}article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section{display:block}
+ul{list-style:none}blockquote,q{quotes:none}blockquote:before,
+blockquote:after,q:before,q:after{content:none}a{margin:0;padding:0;
+font-size:100%;vertical-align:baseline;background:transparent}
+del{text-decoration:line-through}abbr[title],dfn[title]
+{border-bottom:1px dotted;cursor:help}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:block;height:1px;border:0;border-top:1px solid #ccc;
+margin:1em 0;padding:0}input,select{vertical-align:middle}
+
+/*共通*/
+html {
+	height: 100%;
+}
+body {
+	font: 16px/20px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",'メイリオ',Meiryo,Helvetica,Arial,Sans-Serif;
+	height: 100%;
+	margin: 0;
+	background-color: #fff;
+}
+.clear {
+	clear: both;
+}
+
+/*ヘッダー*/
+header {
+	width: 100%;
+	height: 100%;
+	background-color:#fff;
+	position: fixed;
+		top: 0;
+	z-index: 999;
+}
+header img {
+	height: auto;
+	width: auto;
+	position: absolute;
+	z-index: 1000;
+	display: none;
+}
+.iconMenu{
+	height: 37.5px;
+	overflow: hidden;
+}
+.icon {
+	float: right;
+	cursor: pointer;
+}
+.icon > img {
+	width: 100px;
+	height: auto;
+	margin: auto;
+}
+/*コンテンツ*/
+nav {
+	overflow: hidden;
+}
+.menu {
+	background-color: #fff;
+	float: left;
+	overflow: hidden;
+}
+.menu > img {
+	width: 100%;
+	height: auto;
+}
+.menu > img:hover {
+	opacity: 0.8;
+		filter: alpha(opacity=80);
+		-ms-filter: "alpha(opacity=80)";
+	cursor: pointer;
+}
+article {
+	width: 100%;
+	position: static;
+	overflow: hidden;
+}
+.loading {
+	width: 100%;
+	position: absolute;
+	z-index: 999;
+	display: none;
+}
+.loading > img {
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+	display: block;
+}
+.modal {
+	width: 100%;
+	position: absolute;
+	z-index: 999;
+	display: none;
+}
+.modal > img {
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+	display: block;
+}
+.modal > iframe {
+	margin: 0 auto;
+	display: block;
+}
+.creater > p {
+	color: #fff;
+	margin-top: 10px;
+	font-size: 80%;
+	letter-spacing:　1.5em;
+	font-family: 'Roboto', sans-serif;
+	text-align: center;
+}
+.close {
+	width: auto;
+	height: 3%;
+	position: fixed;
+		top: 5%;
+		right: 5%;
+	z-index: 1000;
+	display: none;
+}
+.close:hover{
+	cursor: pointer;
+}
+.bg {
+	width: 100%;
+	height: 100%;
+	background-color:rgba(0,0,0,0.65);
+	position: fixed;
+		top: 0;
+	z-index: 998;
+	display: none;
+	overflow-x: hidden;
+}
+
+/*フッター*/
+footer {
+	width: 90%;
+	margin: auto;
+	text-align: center;
+}
+small {
+	font-size: 80%;
+}
+
+/*info*/
+address {
+	width: 100%;
+	color: #ffffff;
+	margin: 0 auto;
+	margin-top: 100px;
+	text-align: center;
+	font-style: normal;
+	position: absolute;
+	z-index: 999;
+	display: none;
+}
+address > p{
+	margin: 20px;
+}
+address a {
+	color: #00bfff;
+}
+address img {
+	width: 20%;
+	height: auto;
+}
+#information {
+	width: 70%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
