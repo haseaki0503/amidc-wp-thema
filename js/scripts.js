@@ -247,11 +247,6 @@ function arrangeBoxes(){
 
 		//データ表示
 		$('address').fadeIn(500);
-		movie.css({
-			"width": winWidth * 0.7,
-			"height": winWidth * 0.7 * 0.563
-		});
-
 		$('.close').show();
 
 		//モーダル非表示
