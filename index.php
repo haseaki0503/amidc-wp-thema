@@ -24,19 +24,26 @@
 		</div>
 
 		<address>
-			<iframe id="vimeoPlayer" src="http://player.vimeo.com/video/127211217?byline=0&portrait=0" width="1920px" height="1080px" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 			<div id="information">
-				<h1 style="text-align: center;">愛知工業大学名電高等学校<br>情報デザイン部</h1>
-				<p style="text-align: center;">mail:<a href="mailto:info@meidenid.com">info@meidenid.com</a></p>
+				<?php
+					$page = get_page_by_path('contact');
+			    if( isset( $page ) ) {
+			        echo apply_filters( 'the_content', $page->post_content );
+			    }
+				?>
 			</div>
 		</address>
 	</article>
 
-	<div class="iconMenu">
-			<div class="icon">
-				<img class="out" src="<?php echo get_template_directory_uri(); ?>/img/icon.png">
-				<img class="over" src="<?php echo get_template_directory_uri(); ?>/img/icon.gif">
-			</div>
+	<nav id="navbar">
+		<ul>
+			<li class="about">About</li>
+			<li class="contact">Contact</li>
+		</ul>
+	</nav>
+
+	<div id="logo" style="width:100%; text-align: center; padding: 0px; margin-top: 120px; margin-bottom: 100px;">
+		<img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" style="width: 25%; margin: 0 auto;">
 	</div>
 
 	<div style="clear:both;"></div>
@@ -60,5 +67,9 @@
 		<?php endwhile; endif; ?>
 
 	</nav>
+
+	<div class="prev-next">
+		<?php next_posts_link('more'); ?>
+	</div>
 
 <?php get_footer(); ?>

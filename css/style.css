@@ -30,8 +30,29 @@ body {
 	margin: 0;
 	background-color: #fff;
 }
+img {
+	display: block;
+}
 .clear {
 	clear: both;
+}
+
+/*inifinite*/
+.prev-next > a {
+	width: 100px;
+	height: 40px;
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	padding: 0;
+	border: 1px #000000 solid;
+	text-align: center;
+	line-height: 40px;
+	color: #000000;
+	text-decoration: none;
+	font-size: 15px;
+	display: block;
+	cursor: pointer;
 }
 
 /*ヘッダー*/
@@ -62,6 +83,23 @@ header img {
 	width: 100px;
 	height: auto;
 	margin: auto;
+}
+/* navbar */
+#navbar {
+	text-align: right;
+}
+#navbar ul {
+	list-style: none;
+	font-size: 18px;
+	margin-top: 20px;
+}
+#navbar li {
+	display: inline-block;
+	margin-right: 20px;
+	font-weight: bold;
+}
+#navbar li:hover {
+	cursor: pointer;
 }
 /*コンテンツ*/
 nav {
@@ -182,4 +220,22 @@ address img {
 	width: 70%;
 	margin: 0 auto;
 	margin-top: 20px;
+	padding: 80px 50px;
+	color: #000000;
+	background-color: #ffffff;
+	text-align: left;
+}
+#information p {
+	margin-bottom: 20px;
+}
+#information b {
+	font-size: 18px;
+	line-height: 20px;
+	font-weight: bold;
+}
+#information img {
+	width: 60%;
+	max-width: 250px;
+	height: auto;
+	margin-bottom: 60px;
 }

@@ -6,7 +6,7 @@ $(window).load(function(){
 	window.setTimeout("preShowModals(0)", 2000);
 
 	$('.menu').bind("click", preShowModals);
-	$('.icon').bind("click", showInfo);
+	$('.contact').bind("click", showInfo);
 
 	//リロード時、最上部へ移動
 	$('html,body').animate({ scrollTop: 0 }, '1');
@@ -36,27 +36,23 @@ function arrangeBoxes(){
 		var winHeight = $(window).innerHeight();
 
 		//コンテンツボックスのサイズ設定
-		var noBox = Math.floor(winWidth / 250);
+		var noBox = Math.floor(winWidth / 180);
 		if(noBox < 3){
 			noBox = 3;
 		}
-		var contentBoxWidth = winWidth / (noBox+1);
-		var contentBoxMargin = contentBoxWidth / (noBox+1);
+		var navPadding = winWidth * 0.25
+		var contentBoxWidth = 100 / noBox
 
 		$(".menu").css({
-			"width": contentBoxWidth + "px",
-			"height": contentBoxWidth + "px",
-			"margin-right": contentBoxMargin + "px",
-			"margin-bottom": contentBoxMargin + "px"
+			"width": contentBoxWidth + "%",
+			"height": contentBoxWidth + "%",
+			"margin-right": 0,
+			"margin-bottom": 0
 		});
 
-		$("nav").css({
-			"margin-left": contentBoxMargin + "px"
-		});
-
-		$(".iconMenu").css({
-			"margin": contentBoxMargin + "px",
-			"margin-bottom": contentBoxMargin /2 + "px"
+		$("nav.mainMenu").css({
+			"margin-left": navPadding / 2 + "px",
+			"margin-right": navPadding / 2 + "px"
 		});
 
 		//列最後のボックスのマージン調整
@@ -64,11 +60,6 @@ function arrangeBoxes(){
 			"margin-right": 0,
 		});
 
-		//フッターのMargin設定
-		$('footer').css({
-			"margin-top": contentBoxMargin * 2,
-			"margin-bottom": contentBoxMargin * 2
-		});
 	}
 
 
@@ -79,16 +70,20 @@ function arrangeBoxes(){
 
 		//ロゴサイズ設定
 		if(winWidth < winHeight){
-			var logoSize = winWidth * 0.3;
+			var logoWidth = winWidth * 0.1;
+			//var logoHeight = "auto";
 		} else {
-			var logoSize = winHeight * 0.3;
+			//var logoWidth = "auto";
+			var logoHeight = winHeight * 0.1;
 		}
 
 		$("#logo").css({
-			"width": logoSize,
-			"height": logoSize,
-			"left": ($("header").width() - logoSize) / 2,
-			"top": ($("header").height() - logoSize) / 2,
+			"width": logoWidth,
+			"height": logoHeight,
+		});
+		$("#logo").css({
+			"left": ($("header").width() - $("#logo").width()) / 2,
+			"top": ($("header").height() - $("#logo").height()) / 2,
 		});
 
 		//フェードイン
@@ -102,7 +97,7 @@ function arrangeBoxes(){
 				$("header").hide();
 				showContent();
 			});
-		}, 500);
+		}, 700);
 	}
 
 	function showContent(){
@@ -115,6 +110,8 @@ function arrangeBoxes(){
 	};
 
 	function preShowModals (flag, event) {
+
+		console.log(event);
 
 		modal = $(".modal");
 
