@@ -14,6 +14,8 @@ $(window).load(function(){
 	//リサイズ時にボックスの配置をやり直す
 	$(window).bind("resize", arrangeBoxes);
 
+	$(".prev-next").bind("click", arrangeBoxes);
+
 
 	//右上のAMIDCロゴの設定
 	$(".over").hide();
