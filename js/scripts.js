@@ -129,6 +129,11 @@ function arrangeBoxes(){
 			showModals(modalURL, modalHash);
 		};
 
+		//google analytics
+		ga('send', 'pageview', {
+ 			'page': location.pathname + location.search  + location.hash
+		});
+
 	};
 
 	function showModals(modalURL, modalHash){
