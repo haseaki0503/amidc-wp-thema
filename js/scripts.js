@@ -70,7 +70,7 @@ function arrangeBoxes(){
 
 		//ロゴサイズ設定
 		if(winWidth < winHeight){
-			var logoWidth = winWidth * 0.1;
+			var logoWidth = winWidth * 0.5;
 			//var logoHeight = "auto";
 		} else {
 			//var logoWidth = "auto";

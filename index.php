@@ -42,8 +42,8 @@
 		</ul>
 	</nav>
 
-	<div id="logo" style="width:100%; text-align: center; padding: 0px; margin-top: 120px; margin-bottom: 100px;">
-		<img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" style="width: 25%; margin: 0 auto;">
+	<div id="head-logo">
+		<img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
 	</div>
 
 	<div style="clear:both;"></div>
