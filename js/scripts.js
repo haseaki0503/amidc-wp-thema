@@ -1,36 +1,36 @@
+scroll = 0;
+
 $(window).load(function(){
 
+	// infinit(WordPress-plugin)
+	$('a#next').click(function(){
+		$(document).trigger('retrieve.infscr');
+		return false;
+	});
+
+	//ロゴの表示、最上部へ移動
 	hideLogo();
+	init();
+
 	arrangeBoxes();
-
-	window.setTimeout("preShowModals(0)", 2000);
-
-	$('.menu').bind("click", preShowModals);
-	$('.contact').bind("click", showInfo);
-
-	//リロード時、最上部へ移動
-	$('html,body').animate({ scrollTop: 0 }, '1');
 
 	//リサイズ時にボックスの配置をやり直す
 	$(window).bind("resize", arrangeBoxes);
 
-	$(".prev-next").bind("click", arrangeBoxes);
-
-
-	//右上のAMIDCロゴの設定
-	$(".over").hide();
-	$(".out, .over").hover(
-		function(){
-			$(".out").hide();
-			$(".over").show();
-		},
-		function(){
-			$(".out").show();
-			$(".over").hide();
-		}
-	);
+	window.setTimeout("preShowModals(0)", 2000);
 
 });
+
+function init(){
+	// ずれるので2回arrange
+	arrangeBoxes();
+	setTimeout(function() {
+		arrangeBoxes();
+	}, 100);
+
+	$('.menu').on('click', showModals);
+	$('.contact').bind("click", showInfo);
+}
 
 function arrangeBoxes(){
 		//ウィンドウサイズ取得
@@ -111,59 +111,54 @@ function arrangeBoxes(){
 			});
 	};
 
-	function preShowModals (flag, event) {
-
-		console.log(event);
+	/*********************
+	* モーダルの表示
+	**********************/
+	function showModals(flag){
 
 		modal = $(".modal");
 
-		if (flag === 0) {
-			if (location.hash) {
-				modalHash = location.hash.substring(1, location.hash.length);
-				modalURL = 'http://' + location.host + '/?p=' + modalHash;
-				showModals(modalURL, modalHash);
-			} else {
-				return false;
-			}
+		//hash追加
+		if (location.hash && flag === 0) {
+			modalHash = location.hash.substring(1, location.hash.length);
+			modalURL = 'http://' + location.host + '/?p=' + modalHash;
 		} else {
 			modalURL = $(this).children("a").attr('href');
-			modalHash = modalURL.replace("http://meidenid.com/?p=","");
-			showModals(modalURL, modalHash);
-		};
+			modalHash = modalURL.replace("http://"+ location.host + "/?p=","");
+		}
+		location.hash = modalHash;
 
 		//google analytics
 		ga('send', 'pageview', {
  			'page': location.pathname + location.search  + location.hash
 		});
 
-	};
-
-	function showModals(modalURL, modalHash){
-
-		//hash追加
-		location.hash = modalHash;
-
-		//ウィンドウサイズ取得
+		//ウィンドウサイズ, スクロール位置取得
 		var winWidth = $(window).innerWidth();
 		var winHeight = $(window).innerHeight();
+		scroll = $(window).scrollTop();
+
+		//メニューをunbind
+		$('.menu').off('click');
+		$('.icon').off("click");
 
 		//背景表示
 		$(".bg").fadeIn(500);
 
 		//ロード画像のプリロード
-		$("<img>").attr("src", "http://meidenid.com/wp-content/themes/mid/img/loading.gif" );
+		$("<img>").attr("src", "http://"+ location.host +"/wp-content/themes/mid/img/loading.gif" );
 
 		//ロード
 		modal.load(modalURL,
 			function(){
 
 				modal.css({
-					top: $(window).scrollTop() + winHeight * 0.1 + "px",
+					top: scroll + winHeight * 0.1 + "px",
 				});
 
 				//ローディング画像表示
 				$('.loading').css({
-					"top": $(window).scrollTop() + winHeight / 2 - 12 + "px"
+					"top": scroll + winHeight / 2 - 12 + "px"
 				});
 
 				if (winWidth > winHeight) {
@@ -178,7 +173,6 @@ function arrangeBoxes(){
 
 				$('.loading').show();
 
-
 				//モーダル表示
 				var movie = modal.children('iframe');
 				var image = modal.children('img');
@@ -188,7 +182,7 @@ function arrangeBoxes(){
 					"width": winWidth * 0.7,
 					"height": winWidth * 0.7 * 0.563
 					});
-					movie.bind("load", function(){
+					movie.on("load", function(){
 					$('.loading').hide();
 						modal.fadeIn(500);
 					});
@@ -199,39 +193,54 @@ function arrangeBoxes(){
 					"max-width": winWidth * 0.8 + "px",
 					"max-height": winHeight * 0.8 + "px"
 					});
-					image.bind("load", function(){
+					image.on("load", function(){
 						$('.loading').hide();
 						modal.fadeIn(500);
 					});
 				};
 
-				//閉じるボタン表示
-				$('.close').show().unbind();
-
-				//モーダル非表示
-				$('.modal, .close, .bg').click(function() {
-					modal.fadeOut(500);
-					$('.bg').hide();
-					$('.close').hide();
-					$('.loading').hide();
-
-					//再生停止
-					if (movie.get(0)){
-						$f(document.getElementById('vimeoPlayer')).api('unload');
-					};
-
-					//hash削除
-					location.hash='';
-				});
+				//閉じるボタン表示してbind
+				$('.close').show();
+				$('.modal, .close, .bg').on('click', hideModals);
 
 			});
 	};
 
+	function hideModals(){
+		modal.hide();
+		$('.bg').hide();
+		$('.close').hide();
+		$('.loading').hide();
+
+		//再生停止
+		$f(document.getElementById('vimeoPlayer')).api('unload');
+
+		//メニューをbind
+		$('.menu').on('click', showModals);
+		$('.icon').on("click", showInfo);
+
+		//unbind
+		$('.modal, .close, .bg').off('click', hideModals);
+
+		//hash削除
+		location.hash='';
+
+		//元の位置にスクロール
+		$(window).scrollTop(scroll);
+	}
+
+
+	/*********************
+	* Information の表示
+	**********************/
 	function showInfo(){
 
-		var movie = $('address').children('iframe');
 		var winWidth = $(window).innerWidth();
 		var winHeight = $(window).innerHeight();
+		var scroll = $(window).scrollTop();
+
+		//メニューをunbind
+		$('.menu').off('click');
 
 		//背景表示
 		$(".bg").show();
@@ -251,9 +260,14 @@ function arrangeBoxes(){
 		});
 		$(".close, .bg, address").click(function(event) {
 			$('address').hide();
-			$(".bg").fadeOut(500);
-			$('.close').fadeOut(500);
-			$f(document.getElementById('vimeoPlayer')).api('unload');
+			$(".bg").hide();
+			$('.close').hide();
 		});
+
+		//メニューをbind
+		$('.menu').on('click', showModals);
+
+		//元の位置にスクロール
+		$(window).scrollTop(scroll);
 
 	};
