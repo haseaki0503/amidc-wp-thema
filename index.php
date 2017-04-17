@@ -7,7 +7,7 @@
 
 <body>
 	<header>
-		<img id="logo" src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
+		<img id="logo" src="<?php echo get_template_directory_uri(); ?>/img/logo_cursive.png">
 		<aside>
 			<noscript>お使いのブラウザのJavaScriptを有効にしてください。</noscript>
 		</aside>
@@ -43,7 +43,7 @@
 	</nav>
 
 	<div id="head-logo">
-		<img src="<?php echo get_template_directory_uri(); ?>/img/logo.png">
+		<img src="<?php echo get_template_directory_uri(); ?>/img/logo_top.png">
 	</div>
 
 	<div style="clear:both;"></div>
